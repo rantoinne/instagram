@@ -5,7 +5,11 @@
 2. Clone the web repo
 3. Run web repo using `docker compose up`
 4. On app repo, run `yarn && cd ios/ && pod install && cd ../`
-5. Now run for both platforms using `yarn ios` or `yarn android`
+5. On `src/utils/request` update the IP at line
+```
+export const request = new Request('IP_ADDR:8000');
+```
+6. Now run for both platforms using `yarn ios` or `yarn android`
 
 ### API
 1. `/api/v1/add-comment`
