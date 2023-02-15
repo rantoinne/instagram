@@ -1,5 +1,5 @@
 import { PADDINGS, COLOR_CODES, FONT_FAMILY } from '@utils';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -12,7 +12,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: PADDINGS.X_SMALL,
     backgroundColor: COLOR_CODES.WHITE_BLUR,
     borderColor: COLOR_CODES.WHITE_BLUR_HEAVY,
-    // paddingVertical: 0,
+    ...Platform.select({
+      ios: {
+        paddingVertical: PADDINGS.MEDIUM,
+      },
+    }),
   },
   inputStyle: {
     flex: 1,
