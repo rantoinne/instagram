@@ -35,14 +35,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Access Warning</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera Access Warning</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone Access Warning</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
@@ -89,8 +89,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

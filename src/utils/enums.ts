@@ -1,4 +1,4 @@
-// @ts-ignore
+/* eslint no-unused-vars: "off" */
 export enum COLOR_CODES {
   BLACK = '#000000',
   WHITE = '#FFFFFF',
@@ -64,4 +64,9 @@ export enum FONT_FAMILY {
   MEDIUM = 'Poppins-Medium',
   REGULAR = 'Poppins-Regular',
   SEMI_BOLD = 'Poppins-SemiBold',
+}
+
+export enum STORAGE_KEY {
+  TOKEN = '@TOKEN',
+  USER_INFO = '@USER_INFO'
 }

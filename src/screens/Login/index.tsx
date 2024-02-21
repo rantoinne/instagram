@@ -15,7 +15,9 @@ import {
   loginUser,
   INPUT_TYPE,
   COLOR_CODES,
-  storeUserId,
+  storeUserInfo,
+  storeLoginToken,
+  showToast,
 } from '@utils';
 import { ImageLinks } from '@images';
 import styles from './styles';
@@ -38,9 +40,17 @@ export const Login: FC<Props> = ({ navigation }) => {
       password,
     });
     
-    if (res.isSuccess) {
-      await storeUserId(res.userId);
+    if (res.token) {
+      await storeLoginToken(res.token);
+      delete res.token;
+      await storeUserInfo(res);
       navigateToScreen('Tabs');
+    } else {
+      showToast({
+        type: 'error',
+        position: 'bottom',
+        message: res?.error ?? '',
+      });
     }
   }
 
@@ -71,6 +81,7 @@ export const Login: FC<Props> = ({ navigation }) => {
       <Divider height={PADDINGS.X_LARGE} />
 
       <InputField
+        secureTextEntry
         value={password}
         placeholder="Password"
         type={INPUT_TYPE.UNDERLINE}

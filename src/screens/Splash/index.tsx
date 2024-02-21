@@ -7,7 +7,7 @@ import {
 } from '@components';
 import { ImageLinks } from '@images';
 import styles from './styles';
-import { getUserId, height, width } from '@utils';
+import { getStoreUserInfo, height, width } from '@utils';
 
 interface Props {
   navigation: any;
@@ -19,8 +19,8 @@ interface Props {
  */
 export const Splash: FC<Props> = ({ navigation }) => {
   const checkCurrentSession = async () => {
-    const userId = await getUserId();
-    navigation.navigate(userId !== null ? 'Tabs' : 'Auth');
+    const userInfo = await getStoreUserInfo();
+    navigation.navigate(userInfo !== null ? 'Tabs' : 'Auth');
   }
   
   useEffect(() => {

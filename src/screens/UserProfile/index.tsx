@@ -19,10 +19,10 @@ import { ImageLinks } from '@images';
 import styles from './styles';
 import {
   PADDINGS,
-  getUserId,
+  getStoreUserInfo,
   COLOR_CODES,
   getUserInfo,
-  removeUserId,
+  resetStoreUserInfo,
   IMAGE_DIMENSIONS,
   COLUMN_ALIGNMENT,
   HIT_SLOP_FOR_TOUCHABLES,
@@ -38,11 +38,11 @@ export const UserProfile: FC<Props> = ({ navigation }) => {
   const avatarAvailable = true;
 
   const getAllPostsByUser = async () => {
-    const userId = await getUserId();
-    const res = await getUserInfo(userId);
-    if (res?.isSuccess) {
-      setUserInfo(res?.userInfo);
-    }
+    const userId = await getStoreUserInfo();
+    // const res = await getUserInfo(userId);
+    // if (res?.isSuccess) {
+    //   setUserInfo(res?.userInfo);
+    // }
   };
   
   useEffect(() => {
@@ -68,7 +68,7 @@ export const UserProfile: FC<Props> = ({ navigation }) => {
   }
 
   const logout = async () => {
-    await removeUserId();
+    await resetStoreUserInfo();
     navigation.popToTop();
     navigation.navigate('Auth');
   }

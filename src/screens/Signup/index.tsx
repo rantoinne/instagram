@@ -14,15 +14,17 @@ import {
 import {
   PADDINGS,
   debounce,
+  signUpUser,
   showToast,
   INPUT_TYPE,
   COLOR_CODES,
   EMAIL_REGEX,
   userNameAvailability,
+  storeLoginToken,
+  storeUserInfo,
 } from '@utils';
 import { ImageLinks } from '@images';
 import styles from './styles';
-import { signUpUser } from '@utils';
 
 interface Props {
   navigation: any;
@@ -33,7 +35,7 @@ export const SignUp: FC<Props> = ({
 }) => {
   const [email, setEmail] = useState<string>('');
   const [emailValid, setEmailValid] = useState<boolean>(null);
-  const [fullName, setFullName] = useState<string>('');
+  const [name, setFullName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -44,17 +46,22 @@ export const SignUp: FC<Props> = ({
   const onPressSignup = async () => {
     const res = await signUpUser({
       email,
-      fullName,
+      name,
       userName,
       password,
     });
 
-    if (res.isSuccess) {
+    console.log({ res });
+
+    if (res.token) {
+      await storeLoginToken(res.token);
+      delete res.token;
+      await storeUserInfo(res);
       navigateToLoginScreen();
     } else {
       showToast({
         type: 'error',
-        message: 'An error occurred!',
+        message: res?.error ?? 'An error occurred!',
         position: 'bottom',
       })
     }
@@ -92,6 +99,7 @@ export const SignUp: FC<Props> = ({
           value={email}
           placeholder="Email address"
           type={INPUT_TYPE.OUTLINE}
+          autoCorrect={false}
           onChangeText={validateAndSetEmail}
           inputStyle={styles.inputTextStyle}
           placeholderTextColor={COLOR_CODES.DOVE_GRAY}
@@ -112,9 +120,10 @@ export const SignUp: FC<Props> = ({
         <Divider height={PADDINGS.SMALL} />
 
         <InputField
-          value={fullName}
+          value={name}
           placeholder="Full Name"
           type={INPUT_TYPE.OUTLINE}
+          autoCorrect={false}
           onChangeText={setFullName}
           inputStyle={styles.inputTextStyle}
           placeholderTextColor={COLOR_CODES.DOVE_GRAY}
@@ -127,6 +136,7 @@ export const SignUp: FC<Props> = ({
           value={userName}
           placeholder="Username"
           type={INPUT_TYPE.OUTLINE}
+          autoCorrect={false}
           inputStyle={styles.inputTextStyle}
           onChangeText={checkAndUpdateUserName}
           containerStyle={styles.inputContainerStyle}
@@ -139,6 +149,7 @@ export const SignUp: FC<Props> = ({
           secureTextEntry
           value={password}
           placeholder="Password"
+          autoCorrect={false}
           type={INPUT_TYPE.OUTLINE}
           onChangeText={setPassword}
           inputStyle={styles.inputTextStyle}

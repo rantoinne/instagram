@@ -11,6 +11,8 @@ export const request = new Request('IP_ADDR:8000');
 ```
 6. Now run for both platforms using `yarn ios` or `yarn android`
 
+**NOTE** For Xcode 15.2 and Sonoma OS, Select Pods>React-Codegen and change iOS deployement target to 12 from 11
+
 ### API
 1. `/api/v1/add-comment`
 - Adds a comment to a specific post and returns refreshed info about the same post
