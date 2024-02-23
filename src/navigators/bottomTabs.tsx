@@ -28,24 +28,18 @@ export const BottomTabs = () => {
       <Tab.Screen
         name="Feeds"
         options={{
-          tabBarIcon: ({ focused }) => {
-            if (focused) {
-              return <Foundation name="home" size={24} color={COLOR_CODES.BLACK} />;
-            }
-            return <Foundation name="home" size={24} color={COLOR_CODES.BLACK_BLUR} />;
-          }
+          tabBarIcon: ({ focused }) => (
+            <Foundation name="home" size={24} color={focused ? COLOR_CODES.BLACK : COLOR_CODES.BLACK_BLUR} />
+          ),
         }}
         component={CommonStack}
       />
       <Tab.Screen
         name="Search"
         options={{
-          tabBarIcon: ({ focused }) => {
-            if (focused) {
-              return <Fontisto name="search" size={24} color={COLOR_CODES.BLACK} />;
-            }
-            return <Fontisto name="search" size={24} color={COLOR_CODES.BLACK_BLUR} />;
-          },
+          tabBarIcon: ({ focused }) => (
+            <Fontisto name="search" size={24} color={focused ? COLOR_CODES.BLACK : COLOR_CODES.BLACK_BLUR} />
+          ),
         }}
         listeners={{
           tabPress: preventTabPress
@@ -55,12 +49,9 @@ export const BottomTabs = () => {
       <Tab.Screen
         name="Reel"
         options={{
-          tabBarIcon: ({ focused }) => {
-            if (focused) {
-              return <MaterialCommunityIcons name="movie" size={24} color={COLOR_CODES.BLACK} />;
-            }
-            return <MaterialCommunityIcons name="movie" size={24} color={COLOR_CODES.BLACK_BLUR} />;
-          }
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="movie" size={24} color={focused ? COLOR_CODES.BLACK : COLOR_CODES.BLACK_BLUR} />
+          ),
         }}
         component={Feeds}
         listeners={{
@@ -70,12 +61,9 @@ export const BottomTabs = () => {
       <Tab.Screen
         name="Likes"
         options={{
-          tabBarIcon: ({ focused }) => {
-            if (focused) {
-              return <Foundation name="heart" size={24} color={COLOR_CODES.BLACK} />;
-            }
-            return <Foundation name="heart" size={24} color={COLOR_CODES.BLACK_BLUR} />;
-          }
+          tabBarIcon: ({ focused }) => (
+            <Foundation name="heart" size={24} color={focused ? COLOR_CODES.BLACK : COLOR_CODES.BLACK_BLUR} />
+          ),
         }}
         component={Feeds}
         listeners={{
@@ -85,12 +73,9 @@ export const BottomTabs = () => {
       <Tab.Screen
         name="Profile"
         options={{
-          tabBarIcon: ({ focused }) => {
-            if (focused) {
-              return <FontAwesome name="user-circle-o" size={24} color={COLOR_CODES.BLACK} />;
-            }
-            return <FontAwesome name="user-circle-o" size={24} color={COLOR_CODES.BLACK_BLUR} />;
-          }
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome name="user-circle-o" size={24} color={focused ? COLOR_CODES.BLACK : COLOR_CODES.BLACK_BLUR} />
+          ),
         }}
         component={UserProfile}
       />

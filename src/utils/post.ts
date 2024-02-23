@@ -9,8 +9,8 @@ export const uploadPost = async (postMeta: {
   await request.post('/api/v1/create-post', postMeta);
 };
 
-export const getPosts = async (userId: number) => {
-  return await request.post('/api/v1/get-posts', { userId });
+export const getPosts = async () => {
+  return await request.get('/api/v1/post/get-feed');
 };
 
 export const getUserPosts = async (userId: number) => {

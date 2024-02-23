@@ -97,8 +97,9 @@ export const Comments: FC<Props> = ({
         {/* Comments View */}
         <View style={styles.commentTileWrapper}>
           {
-            post.comments?.map(comment => (
+            post.comments?.map((comment: any, idx: number) => (
               <CommentTile
+                key={`${comment}_${idx}`}
                 commentInfo={comment}
                 userInfo={comment.user}
               />

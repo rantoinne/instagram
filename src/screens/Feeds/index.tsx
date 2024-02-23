@@ -23,7 +23,7 @@ import {
   COLUMN_ALIGNMENT,
   HIT_SLOP_FOR_TOUCHABLES,
   addCommentOnPost,
-  getUserId,
+  getStoreUserInfo,
 } from '@utils';
 
 interface Props {
@@ -42,7 +42,8 @@ export const Feeds: FC<Props> = ({
   }
   
   const setLikedPostsHandler = async (postId: number) => {
-    const userId = await getUserId();
+    const userInfo = await getStoreUserInfo();
+    const userId = userInfo.id;
     const indexOfPostLike = findIndexOfPost(postId);
     if (indexOfPostLike < 0) {
       setLikedPosts([...likedPosts, postId]);
@@ -82,15 +83,15 @@ export const Feeds: FC<Props> = ({
   }
 
   const addCommentHandler = async (postId: number, comment: string) => {
-    const userId = await getUserId();
+    const userInfo = await getStoreUserInfo();
     const res = await addCommentOnPost({
       postId,
       comment,
-      userId,
+      userId: userInfo.id,
     });
     if (res?.isSuccess) {
       const indexOfPost = posts.findIndex(p => p.id === postId);
-      let postsClone = [...posts];
+      const postsClone = [...posts];
       
       postsClone[indexOfPost] = res?.post;
       setPosts([...postsClone]);
@@ -99,10 +100,10 @@ export const Feeds: FC<Props> = ({
   }
   
   const getPostsForFeed = async () => {
-    const userId = await getUserId();
-    const posts = await getPosts(userId);
-    setPosts(posts?.allPosts);
-    updateLikedPosts(posts?.allPosts);
+    const posts = await getPosts();
+    console.log({ posts });
+    setPosts(posts);
+    // updateLikedPosts(posts?.allPosts);
   };
   
   useEffect(() => {

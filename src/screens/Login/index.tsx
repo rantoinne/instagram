@@ -18,6 +18,7 @@ import {
   storeUserInfo,
   storeLoginToken,
   showToast,
+  request,
 } from '@utils';
 import { ImageLinks } from '@images';
 import styles from './styles';
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export const Login: FC<Props> = ({ navigation }) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -35,6 +37,7 @@ export const Login: FC<Props> = ({ navigation }) => {
   }
 
   const loginUserHandler = async () => {
+    setLoading(true);
     const res = await loginUser({
       userName,
       password,
@@ -42,8 +45,9 @@ export const Login: FC<Props> = ({ navigation }) => {
     
     if (res.token) {
       await storeLoginToken(res.token);
+      request.authToken = res.token;
       delete res.token;
-      await storeUserInfo(res);
+      await storeUserInfo(JSON.stringify(res));
       navigateToScreen('Tabs');
     } else {
       showToast({
@@ -52,6 +56,7 @@ export const Login: FC<Props> = ({ navigation }) => {
         message: res?.error ?? '',
       });
     }
+    setLoading(false);
   }
 
   return (
@@ -96,6 +101,7 @@ export const Login: FC<Props> = ({ navigation }) => {
       {/* Sign In Button */}
       <Button
         onPress={loginUserHandler}
+        showLoader={loading}
         disabled={password.length === 0 || userName.length === 0}
         title="Login"
       />

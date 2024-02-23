@@ -3,7 +3,7 @@ import { STORAGE_KEY } from './enums';
 
 export const createAndStoreKey = async (key: STORAGE_KEY, value: any): Promise<void> => {
   try {
-    await AsyncStorage.setItem(key, String(value));
+    await AsyncStorage.setItem(key, value);
   } catch (e) {
     throw new Error(e);
   }
@@ -19,7 +19,7 @@ export const getStoreValueForKey = async (key: STORAGE_KEY): Promise<string> => 
   return value;
 };
 
-export const storeUserInfo = async (value: number): Promise<void> => {
+export const storeUserInfo = async (value: string): Promise<void> => {
   await createAndStoreKey(STORAGE_KEY.USER_INFO, value);
 };
 
@@ -27,8 +27,10 @@ export const storeLoginToken = async (value: string) => {
   await createAndStoreKey(STORAGE_KEY.TOKEN, value);
 };
 
-export const getStoreUserInfo = async (): Promise<string> => {
+export const getStoreUserInfo = async (): Promise<any> => {
   const value = await getStoreValueForKey(STORAGE_KEY.USER_INFO);
+  console.log({ value });
+  console.log({ value: JSON.parse(value) });
   return value;
 };
 

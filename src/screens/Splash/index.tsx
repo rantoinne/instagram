@@ -7,7 +7,7 @@ import {
 } from '@components';
 import { ImageLinks } from '@images';
 import styles from './styles';
-import { getStoreUserInfo, height, width } from '@utils';
+import { getLoginToken, getStoreUserInfo, height, request, width } from '@utils';
 
 interface Props {
   navigation: any;
@@ -18,13 +18,17 @@ interface Props {
  * But due to time constraints added a JS workaround
  */
 export const Splash: FC<Props> = ({ navigation }) => {
-  const checkCurrentSession = async () => {
-    const userInfo = await getStoreUserInfo();
-    navigation.navigate(userInfo !== null ? 'Tabs' : 'Auth');
-  }
-  
   useEffect(() => {
-    setTimeout(checkCurrentSession, 1200);
+    const checkCurrentSession = async () => {
+      const userInfo = await getStoreUserInfo();
+      // console.log({ userInfo });
+      if (userInfo) {
+        const token = await getLoginToken();
+        request.authToken = token;
+      }
+      navigation.navigate(userInfo !== null ? 'Tabs' : 'Auth');
+    }
+    checkCurrentSession();
   }, []);
   
   return (

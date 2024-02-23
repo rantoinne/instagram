@@ -56,7 +56,7 @@ export const SignUp: FC<Props> = ({
     if (res.token) {
       await storeLoginToken(res.token);
       delete res.token;
-      await storeUserInfo(res);
+      await storeUserInfo(JSON.stringify(res));
       navigateToLoginScreen();
     } else {
       showToast({

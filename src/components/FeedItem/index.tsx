@@ -47,10 +47,10 @@ export const FeedItem: FC<Props> = ({
     if (type === 'IMAGE') {
       return (
         <TouchableOpacity
-          onPress={handleDoubleTap}
+          // onPress={handleDoubleTap}
         >
           <IconRenderer
-            source={{ uri: post?.url }}
+            source={{ uri: post?.post_url }}
             imageStyle={styles.imageView}
           />
         </TouchableOpacity>
@@ -66,7 +66,7 @@ export const FeedItem: FC<Props> = ({
 
   const isPostLikedByCurrentUser = likedPosts.includes(post?.id);
 
-  const commentsLength = post?.comments?.length;
+  // const commentsLength = post?.comments?.length;
 
   return (
     <View style={styles.mainContainer}>
@@ -75,16 +75,16 @@ export const FeedItem: FC<Props> = ({
         {/* User Avatar section */}
         <View style={styles.avatarRenderer}>
           <IconRenderer
-            source={{ uri: post?.user.userAvatar }}
+            source={{ uri: post?.avatar }}
             imageStyle={styles.avatar}
           />
           {/* User Info section */}
           <View style={styles.userInfoView}>
             <Text style={styles.userName}>
-              {post?.user.fullName}
+              {post?.name}
             </Text>
             <Text style={styles.accountName}>
-              {post?.user.userName}
+              {post?.user_name}
             </Text>
           </View>
         </View>
@@ -103,7 +103,7 @@ export const FeedItem: FC<Props> = ({
       <View style={styles.actionsContainer}>
         <View style={styles.leftActionsContainer}>
           <TouchableOpacity
-            onPress={likeDislikePost}
+            // onPress={likeDislikePost}
             hitSlop={HIT_SLOP_FOR_TOUCHABLES}
           >
             <MaterialCommunityIcons
@@ -113,7 +113,7 @@ export const FeedItem: FC<Props> = ({
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={navigateToComments}
+            // onPress={navigateToComments}
             style={styles.marginLeftStyle}
             hitSlop={HIT_SLOP_FOR_TOUCHABLES}
           >
@@ -138,10 +138,10 @@ export const FeedItem: FC<Props> = ({
 
       {/* Post Info section */}
       <Text style={styles.likesCount}>
-        {post?.postLikes.length} likes
+        {post?.likes_count} likes
       </Text>
       <Text style={styles.userNameText}>
-        {post?.user.userName}
+        {post?.name}
         &nbsp;
         <Text style={styles.caption}>
           {post?.description}
@@ -149,14 +149,14 @@ export const FeedItem: FC<Props> = ({
       </Text>
       {/* <Divider height={PADDINGS.MEDIUM} /> */}
 
-      {commentsLength > 0 && (
+      {/* {commentsLength > 0 && (
         <Text
           onPress={navigateToComments}
           style={styles.likesCount}
         >
           View all {commentsLength} comments
         </Text>
-      )}
+      )} */}
 
       <Divider height={PADDINGS.X_LARGE} />
     </View>
