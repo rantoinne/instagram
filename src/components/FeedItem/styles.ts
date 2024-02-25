@@ -1,11 +1,14 @@
-import { FONT_FAMILY, height, IMAGE_DIMENSIONS, PADDINGS, width } from '@utils';
+import { COLOR_CODES, FONT_FAMILY, height, IMAGE_DIMENSIONS, PADDINGS, width } from '@utils';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   imageView: {
     width,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     height: height / 3.2,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderColor: COLOR_CODES.ALTO,
     marginTop: PADDINGS.SMALL
   },
   mainContainer: {

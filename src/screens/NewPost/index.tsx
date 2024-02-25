@@ -49,22 +49,22 @@ export const NewPost: FC<Props> = ({
       type: selectedAssetMeta.assets[0].type,
       name: selectedAssetMeta.assets[0].fileName,
     });
-    const userId = await getUserId();
-    if (res.isSuccess) {
-      await uploadPost({
-        userId,
-        description,
-        url: res.url,
-        postType: selectedAssetMeta.assets[0].type,
-      });
-      navigation.goBack();
-    } else {
-      showToast({
-        type: 'error',
-        message: 'Error occurred!',
-        position: 'bottom',
-      })
-    }
+    // const userId = await getUserId();
+    // if (res.isSuccess) {
+    //   await uploadPost({
+    //     userId,
+    //     description,
+    //     url: res.url,
+    //     postType: selectedAssetMeta.assets[0].type,
+    //   });
+    //   navigation.goBack();
+    // } else {
+    //   showToast({
+    //     type: 'error',
+    //     message: 'Error occurred!',
+    //     position: 'bottom',
+    //   })
+    // }
   };
   
   const launchCameraForCapture = () => {

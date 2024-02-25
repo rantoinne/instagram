@@ -25,7 +25,9 @@ class Request {
     url: string,
     body: unknown,
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
+    contentType = 'Content-Type',
   ) {
+    // eslint-disable-next-line no-async-promise-executor
     const request = new Promise<any>(async (resolve, reject) => {
       try {
         let calledUrl = null;
@@ -43,16 +45,18 @@ class Request {
 
         const reqBody = {
           method,
-          headers: this.getRequestHeaders(),
+          headers: this.getRequestHeaders(contentType),
         } as any;
-        if (body) reqBody.body = JSON.stringify(body);
+        const isContentTypeMultipart = contentType.includes('multipart/form-data');
+        console.log({ isContentTypeMultipart });
+        if (body) reqBody.body = !isContentTypeMultipart ? JSON.stringify(body) : body;
 
         let response;
 
         if (method === 'GET') {
-          response = await fetch(`${calledUrl}`, { method, headers: this.getRequestHeaders() });
+          response = await fetch(`${calledUrl}`, { method, headers: this.getRequestHeaders(contentType) });
         } else response = await fetch(`${calledUrl}`, reqBody);
-
+        console.log({ reqBody });
         resolve(await Request.responseParser(response, reqBody));
       } catch (e) {
         console.log('request API error: ', e);
@@ -76,10 +80,10 @@ class Request {
     return this.sendRequest(`${url}?${paramsString}`, {}, 'GET');
   }
 
-  async post (url: string, obj: unknown) {
+  async post (url: string, obj: unknown, contentType = 'application/json') {
     console.log(url);
     
-    return this.sendRequest(url, obj, 'POST');
+    return this.sendRequest(url, obj, 'POST', contentType);
   }
 
   async put (url: string, obj: unknown) {
@@ -134,10 +138,10 @@ class Request {
     return jsonResponse;
   }
 
-  getRequestHeaders () {
+  getRequestHeaders (contentType: string) {
     return {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': contentType,
       Authorization: `Bearer ${this.authToken}`,
     };
   }

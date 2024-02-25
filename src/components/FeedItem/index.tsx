@@ -8,7 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React, { FC } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import { IconRenderer, Divider } from '@components';
 import styles from './styles';
 
@@ -32,7 +32,8 @@ export const FeedItem: FC<Props> = ({
     const now = Date.now();
     const DOUBLE_PRESS_DELAY = 300;
     if (lastTap && (now - lastTap) < DOUBLE_PRESS_DELAY) {
-      likeDislikePost();
+      Alert.alert('Tapped!');
+      // likeDislikePost();
     } else {
       lastTap = now;
     }
@@ -46,14 +47,14 @@ export const FeedItem: FC<Props> = ({
     const type = 'IMAGE';
     if (type === 'IMAGE') {
       return (
-        <TouchableOpacity
-          // onPress={handleDoubleTap}
+        <Pressable
+          onPress={handleDoubleTap}
         >
           <IconRenderer
             source={{ uri: post?.post_url }}
             imageStyle={styles.imageView}
           />
-        </TouchableOpacity>
+        </Pressable>
       )
     }
     // TODO VIDEO
