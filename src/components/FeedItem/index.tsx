@@ -8,9 +8,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React, { FC } from 'react';
-import { Alert, Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { IconRenderer, Divider } from '@components';
 import styles from './styles';
+import { DoubleTapPressable } from '../DoubleTapPressable';
 
 interface Props {
   post: any;
@@ -27,16 +28,9 @@ export const FeedItem: FC<Props> = ({
   navigateToScreen,
   addCommentHandler,
 }) => {
-  let lastTap = null;
+  // let lastTap = null;
   const handleDoubleTap = () => {
-    const now = Date.now();
-    const DOUBLE_PRESS_DELAY = 300;
-    if (lastTap && (now - lastTap) < DOUBLE_PRESS_DELAY) {
-      Alert.alert('Tapped!');
-      // likeDislikePost();
-    } else {
-      lastTap = now;
-    }
+    Alert.alert('Tapped!');
   }
 
   const likeDislikePost = () => {
@@ -47,14 +41,14 @@ export const FeedItem: FC<Props> = ({
     const type = 'IMAGE';
     if (type === 'IMAGE') {
       return (
-        <Pressable
+        <DoubleTapPressable
           onPress={handleDoubleTap}
         >
           <IconRenderer
             source={{ uri: post?.post_url }}
             imageStyle={styles.imageView}
           />
-        </Pressable>
+        </DoubleTapPressable>
       )
     }
     // TODO VIDEO

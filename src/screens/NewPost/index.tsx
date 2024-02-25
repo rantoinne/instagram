@@ -63,27 +63,9 @@ export const NewPost: FC<Props> = ({
       url: res.url,
     });
     navigation.goBack();
-    // const userId = await getUserId();
-    // if (res.isSuccess) {
-    //   await uploadPost({
-    //     userId,
-    //     description,
-    //     url: res.url,
-    //     postType: selectedAssetMeta.assets[0].type,
-    //   });
-    //   navigation.goBack();
-    // } else {
-    //   showToast({
-    //     type: 'error',
-    //     message: 'Error occurred!',
-    //     position: 'bottom',
-    //   })
-    // }
   };
   
   const launchCameraForCapture = () => {
-    console.log('ashas');
-    
     launchCamera({
       mediaType: 'mixed',
       saveToPhotos: true,
