@@ -49,6 +49,20 @@ export const NewPost: FC<Props> = ({
       type: selectedAssetMeta.assets[0].type,
       name: selectedAssetMeta.assets[0].fileName,
     });
+    console.log({ res });
+    if (!res.isSuccess) {
+      showToast({
+        type: 'error',
+        message: 'Error occurred!',
+        position: 'bottom',
+      });
+      return;
+    }
+    await uploadPost({
+      description,
+      url: res.url,
+    });
+    navigation.goBack();
     // const userId = await getUserId();
     // if (res.isSuccess) {
     //   await uploadPost({

@@ -1,17 +1,7 @@
 import { request } from "./request";
 
 export const uploadPost = async (data) => {
-  // await request.post('/api/v1/post/create', data, `multipart/form-data;`);
-  const res = await fetch(`${request.apiUrl}/api/v1/post/create`, {
-    method: 'POST',
-    body: data,
-    headers: {
-      // Accept: 'application/json',
-      'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${request.authToken}`,
-    }
-  });
-  console.log({ res });
+  await request.post('/api/v1/post/create', data);
 };
 
 export const getPosts = async () => {
