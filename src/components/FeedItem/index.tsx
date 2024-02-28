@@ -4,6 +4,7 @@ import {
   IMAGE_DIMENSIONS,
   HIT_SLOP_FOR_TOUCHABLES,
 } from '@utils';
+import Video from 'react-native-video';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -38,21 +39,31 @@ export const FeedItem: FC<Props> = ({
   }
   
   const renderPostContent = (post: any) => {
-    const type = 'IMAGE';
-    if (type === 'IMAGE') {
+    // if (post.post_type === 'IMAGE') {
+    //   return (
+    //     <DoubleTapPressable
+    //       onPress={handleDoubleTap}
+    //     >
+    //       <IconRenderer
+    //         source={{ uri: post?.post_url }}
+    //         imageStyle={styles.imageView}
+    //       />
+    //     </DoubleTapPressable>
+    //   )
+    // }
+    if (post.post_type === 'VIDEO') {
       return (
         <DoubleTapPressable
           onPress={handleDoubleTap}
         >
-          <IconRenderer
-            source={{ uri: post?.post_url }}
-            imageStyle={styles.imageView}
+          <Video source={{uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'}}
+            onError={(e) => console.log('Logging error', JSON.stringify(e))}
+            onLoadStart={() => console.log('Loading-----------')}
+            style={styles.imageView}
           />
         </DoubleTapPressable>
-      )
+      );
     }
-    // TODO VIDEO
-    return null;
   }
 
   const navigateToComments = () => {

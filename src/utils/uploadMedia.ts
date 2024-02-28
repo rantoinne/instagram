@@ -1,9 +1,9 @@
 export const uploadMedia = async (mediaMeta: any): Promise<{ isSuccess?: boolean, url?: string | null }> => {
   const formdata = new FormData();
   formdata.append("file", mediaMeta);
-  formdata.append("upload_preset", "");
-  formdata.append("cloud_name", "");
-
+  formdata.append("cloud_name", "dtctgevhm");
+  formdata.append("upload_preset", "instagram-preset");
+  
   const requestOptions: any = {
     method: 'POST',
     body: formdata,
@@ -14,7 +14,7 @@ export const uploadMedia = async (mediaMeta: any): Promise<{ isSuccess?: boolean
   let isSuccess = false;
   
   try {
-    const res: any = await fetch("https://api.cloudinary.com/v1_1/<KEY>/image/upload", requestOptions);
+    const res: any = await fetch("https://api.cloudinary.com/v1_1/dtctgevhm/image/upload", requestOptions);
     const resJson = await res.json();
     console.log({ resJson });
     if ('url' in resJson) {
