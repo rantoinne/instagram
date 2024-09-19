@@ -6,6 +6,6 @@ import { COLOR_CODES } from './enums';
  * @returns [COLOR, COLOR]
  */
 export const getGradientColors = () => {
-  return [COLOR_CODES.STUDIO, COLOR_CODES.HIBISCUS];
+  return [COLOR_CODES.HIBISCUS_LIGHT, COLOR_CODES.HIBISCUS];
 };
 

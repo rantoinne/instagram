@@ -56,11 +56,11 @@ export const FeedItem: FC<Props> = ({
         <DoubleTapPressable
           onPress={handleDoubleTap}
         >
-          <Video source={{uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'}}
+          {/* <Video source={{uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'}}
             onError={(e) => console.log('Logging error', JSON.stringify(e))}
             onLoadStart={() => console.log('Loading-----------')}
             style={styles.imageView}
-          />
+          /> */}
         </DoubleTapPressable>
       );
     }
